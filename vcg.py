@@ -68,7 +68,7 @@ class VCG:
             # t(bidder 3) = p3*max(r,b_4) = p3*r because r>b_4 per the example
             # pay p_k*max(reserve,next_highest_bid)
             elif k == n-1:
-                maximum = valid_bids[n][1] if len(valid_bids) >= n else reserve
+                maximum = valid_bids[n][1] if len(valid_bids) > n else reserve
                 return c[n-1]*maximum
             # k < n-1
             else:
