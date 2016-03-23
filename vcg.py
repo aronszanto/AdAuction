@@ -46,8 +46,6 @@ class VCG:
         
         (allocation, just_bids) = zip(*allocated_bids)
 
-        print "allocation is", allocation
-        print "just_bids is", just_bids
 
         # TODO: You just have to implement this function
         def total_payment(k):
