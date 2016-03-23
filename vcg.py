@@ -2,6 +2,8 @@
 
 import random
 
+import logging
+
 from gsp import GSP
 
 class VCG:
@@ -44,12 +46,15 @@ class VCG:
         
         (allocation, just_bids) = zip(*allocated_bids)
 
+        print "allocation is", allocation
+        print "just_bids is", just_bids
+
         # TODO: You just have to implement this function
         def total_payment(k):
             """
             Total payment for a bidder in slot k.
             """
-            c = slot_clicks
+            c = slot_clicks # because slot_clicks looks like [[3, 2, 1]]
             n = len(allocation)
 
             # TODO: Compute the payment and return it.
@@ -65,7 +70,7 @@ class VCG:
             # t(bidder 3) = p3*max(r,b_4) = p3*r because r>b_4 per the example
             # pay p_k*max(reserve,next_highest_bid)
             elif k == n-1:
-                maximum = valid_bids[n] if len(valid_bids) >= n else reserve
+                maximum = valid_bids[n][1] if len(valid_bids) >= n else reserve
                 return c[n-1]*maximum
             # k < n-1
             else:

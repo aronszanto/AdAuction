@@ -1,0 +1,3 @@
+# auction commands
+
+python auction.py --perms 1 --iters 200 --seeds
