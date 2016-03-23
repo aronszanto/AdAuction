@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import sys
+import logging
 
 from gsp import GSP
 from util import argmax_index
@@ -50,7 +51,16 @@ class jeronbb:
         returns a list of utilities per slot.
         """
         # TODO: Fill this in
-        utilities = []   # Change this
+
+        slot_min_max = self.slot_info(t, history, reserve)
+        logging.debug("slot_info = " + str(slot_min_max))
+        def utils(j):
+            # compute the utility of taking slot j.
+            # it is the position value multiplied by (v_i - [min bid in previous round to get slot j])
+            return .75 ** j * (self.value - slot_min_max[j][1])
+
+        utilities = map(utils, range(len(history.round(t-1).clicks)))
+        logging.debug("utils are " + str(utilities))
 
         
         return utilities
@@ -65,6 +75,7 @@ class jeronbb:
         """
         i =  argmax_index(self.expected_utils(t, history, reserve))
         info = self.slot_info(t, history, reserve)
+        logging.debug(str(self.id) + " tries for slot " + str(info[i]))
         return info[i]
 
     def bid(self, t, history, reserve):
