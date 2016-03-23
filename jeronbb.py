@@ -89,11 +89,18 @@ class jeronbb:
         # (p_x is the price/click in slot x)
         # If s*_j is the top slot, bid the value v_j
 
-        prev_round = history.round(t-1)
+        #prev_round = history.round(t-1)
         (slot, min_bid, max_bid) = self.target_slot(t, history, reserve)
 
         # TODO: Fill this in.
-        bid = 0  # change this
+        if min_bid > self.value:
+            bid = self.value
+        else:
+            if slot == 0:
+                bid = self.value
+            else:
+                bid = (.75 * (self.value - min_bid) - self.value) * -1
+        logging.debug("agent " + str(self.id) + " bids " + str(bid))
         
         return bid
 
