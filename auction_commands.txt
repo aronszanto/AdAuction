@@ -1,3 +1,52 @@
 # auction commands
 
-python auction.py --perms 1 --iters 200 --seeds
+
+
+python auction.py --perms 1 --iters 1 --seed 44 --reserve 0 --mech gsp --loglevel debug Truthful,5
+
+python auction.py --perms 1 --seed 2 --iters 200 --mech switch --reserve 0 jeronbb,5
+
+
+python auction.py --seed 2 --iters 200 --mech gsp --reserve 10 jeronbb,4 jeronbb_tail,1
+
+python auction.py --num-rounds 48 --mech=gsp --reserve=10 --iters 200 jeronbb,4 jeronbb_tail,1
+
+reserve 0 Average daily revenue (stddev): $4357.72 ($1385.76)
+reserve 50 Average daily revenue (stddev): $4931.45 ($1421.83)
+reserve 75 Average daily revenue (stddev): $5093.35 ($1436.07)
+reserve 80 Average daily revenue (stddev): $5048.86 ($1468.10)
+reserve 85 Average daily revenue (stddev): $4924.36 ($1617.15)
+reserve 90 Average daily revenue (stddev): $5254.26 ($1583.83) **
+reserve 100 Average daily revenue (stddev): $4840.39 ($1745.61)
+reserve 125 Average daily revenue (stddev): $4418.21 ($2250.43)
+reserve 150 Average daily revenue (stddev): $2824.74 ($2401.83)
+
+(4c)
+# perms 1 because the problem says so 
+python auction.py --perms 1 --seed 2 --iters 200 --mech vcg --reserve 0 Truthful,5
+
+* don't forget bid samples from [25, 175]
+
+reserve 0 Average daily revenue (stddev): $4231.64 ($1220.41)
+
+reserve 50 Average daily revenue (stddev): $4634.40 ($1210.92)
+
+reserve 75 Average daily revenue (stddev): $4892.87 ($1369.00)
+
+reserve 80 Average daily revenue (stddev): $5115.31 ($1422.16)
+
+reserve 85 Average daily revenue (stddev): $5205.05 ($1361.34) ** revenue-optimal reserve price
+
+reserve 90 Average daily revenue (stddev): $5041.38 ($1561.15)
+
+reserve 100 Average daily revenue (stddev): $4997.27 ($1795.65)
+
+reserve 125 Average daily revenue (stddev): $4489.21 ($2243.76)
+
+reserve 150 Average daily revenue (stddev): $3001.19 ($2562.70)
+
+
+Instead of using past round history, use all histories and model the bid as sampled from a normal distribution
+
+competitive/altruistic bidding
+
