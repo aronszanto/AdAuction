@@ -50,7 +50,7 @@ class jeronbb:
 
         returns a list of utilities per slot.
         """
-        # TODO: Fill this in
+        
 
         slot_min_max = self.slot_info(t, history, reserve)
         logging.debug("slot_info = " + str(slot_min_max))
@@ -92,7 +92,6 @@ class jeronbb:
         #prev_round = history.round(t-1)
         (slot, min_bid, max_bid) = self.target_slot(t, history, reserve)
 
-        # TODO: Fill this in.
         if min_bid > self.value:
             bid = self.value
         else:
