@@ -2,6 +2,8 @@
 
 import random
 
+import logging
+
 from gsp import GSP
 
 class VCG:
@@ -44,15 +46,34 @@ class VCG:
         
         (allocation, just_bids) = zip(*allocated_bids)
 
+
         # TODO: You just have to implement this function
         def total_payment(k):
             """
             Total payment for a bidder in slot k.
             """
-            c = slot_clicks
+            c = slot_clicks # because slot_clicks looks like [[3, 2, 1]]
             n = len(allocation)
 
             # TODO: Compute the payment and return it.
+
+            # if n < len(c):
+
+            # slot k >= n not in the allocation, so pay nothing
+            # This case should not happen though because per_click_payments call
+            # total_payment(k) for k in range(len(allocation))
+            if k >= n:
+                return 0 
+            # last slot in the allocation
+            # t(bidder 3) = p3*max(r,b_4) = p3*r because r>b_4 per the example
+            # pay p_k*max(reserve,next_highest_bid)
+            elif k == n-1:
+                maximum = valid_bids[n][1] if len(valid_bids) >= n else reserve
+                return c[n-1]*maximum
+            # k < n-1
+            else:
+                return (c[k]-c[k+1])*just_bids[k+1] + total_payment(k+1)
+
 
         def norm(totals):
             """Normalize total payments by the clicks in each slot"""
